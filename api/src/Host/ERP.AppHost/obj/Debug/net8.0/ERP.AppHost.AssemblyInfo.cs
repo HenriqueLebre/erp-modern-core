@@ -10,10 +10,21 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("e4c796c6-f4d5-47b7-9b9c-5ac03ae1bba7")]
+[assembly: System.Reflection.AssemblyMetadata("dcpclipath", "C:\\Users\\Henrique Lebre\\.nuget\\packages\\aspire.hosting.orchestration.win-x64\\8.2." +
+    "2\\tools\\dcp.exe")]
+[assembly: System.Reflection.AssemblyMetadata("dcpextensionpaths", "C:\\Users\\Henrique Lebre\\.nuget\\packages\\aspire.hosting.orchestration.win-x64\\8.2." +
+    "2\\tools\\ext\\")]
+[assembly: System.Reflection.AssemblyMetadata("dcpbinpath", "C:\\Users\\Henrique Lebre\\.nuget\\packages\\aspire.hosting.orchestration.win-x64\\8.2." +
+    "2\\tools\\ext\\bin\\")]
+[assembly: System.Reflection.AssemblyMetadata("apphostprojectpath", "D:\\dev\\Mordernizacao-ERP\\erp-modern-core-father\\erp-modern-core\\api\\src\\Host\\ERP." +
+    "AppHost")]
+[assembly: System.Reflection.AssemblyMetadata("aspiredashboardpath", "C:\\Users\\Henrique Lebre\\.nuget\\packages\\aspire.dashboard.sdk.win-x64\\8.2.2\\tools\\" +
+    "Aspire.Dashboard.exe")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("ERP.AppHost")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c58ed6909506df29893d3d1abe8778abf62f4a02")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2a19e9e129195af2649e78fdb8ad33f665dfa908")]
 [assembly: System.Reflection.AssemblyProductAttribute("ERP.AppHost")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ERP.AppHost")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

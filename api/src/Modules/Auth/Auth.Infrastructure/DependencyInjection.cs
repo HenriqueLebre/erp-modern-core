@@ -16,7 +16,7 @@ public static class DependencyInjection
         // DbContext (PostgreSQL)
         services.AddDbContext<AuthDbContext>(options =>
         {
-            options.UseNpgsql(configuration.GetConnectionString("AuthDb"));
+            options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"));
         });
 
         // Repositório de usuário

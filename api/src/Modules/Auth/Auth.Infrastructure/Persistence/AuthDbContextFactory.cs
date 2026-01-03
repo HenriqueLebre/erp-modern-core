@@ -18,8 +18,9 @@ public sealed class AuthDbContextFactory : IDesignTimeDbContextFactory<AuthDbCon
             .AddEnvironmentVariables()
             .Build();
 
-        var connectionString = configuration.GetConnectionString("AuthDb")
-            ?? throw new InvalidOperationException("ConnectionString 'AuthDb' not found.");
+        var connectionString =
+            Environment.GetEnvironmentVariable("ConnectionStrings__DefaultConnection")
+            ?? throw new InvalidOperationException("Set ConnectionStrings__DefaultConnection.");
 
         var optionsBuilder = new DbContextOptionsBuilder<AuthDbContext>();
         optionsBuilder.UseNpgsql(connectionString);
