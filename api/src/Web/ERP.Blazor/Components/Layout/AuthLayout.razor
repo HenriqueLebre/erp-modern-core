@@ -1,0 +1,44 @@
+@inherits LayoutComponentBase
+
+<div class="auth-layout">
+    @* Brand Panel - Visible on desktop *@
+    <aside class="auth-brand">
+        <div class="auth-brand-content">
+            <div class="auth-brand-logo">📊</div>
+            <h1>ModernERP</h1>
+            <p class="subtitle">
+                Sistema de gestão empresarial moderno, integrando autenticação 
+                segura com sua aplicação legada de forma transparente.
+            </p>
+
+            <div class="auth-brand-features">
+                <div class="auth-brand-feature">
+                    <span class="auth-brand-feature-icon">🔐</span>
+                    <span class="auth-brand-feature-text">Autenticação segura com JWT</span>
+                </div>
+                <div class="auth-brand-feature">
+                    <span class="auth-brand-feature-icon">🚀</span>
+                    <span class="auth-brand-feature-text">Integração automática com ERP</span>
+                </div>
+                <div class="auth-brand-feature">
+                    <span class="auth-brand-feature-icon">💻</span>
+                    <span class="auth-brand-feature-text">Interface moderna e responsiva</span>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    @* Form Panel *@
+    <section class="auth-form-panel">
+        <div class="auth-form-container">
+            @* Mobile brand header *@
+            <div class="auth-mobile-brand">
+                <div class="auth-mobile-logo">📊</div>
+                <h1>ModernERP</h1>
+                <p>Sistema de Gestão Empresarial</p>
+            </div>
+
+            @Body
+        </div>
+    </section>
+</div>

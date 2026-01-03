@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "ERP.Blazor/1.0.0": {
+        "runtime": {
+          "ERP.Blazor.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "ERP.Blazor/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

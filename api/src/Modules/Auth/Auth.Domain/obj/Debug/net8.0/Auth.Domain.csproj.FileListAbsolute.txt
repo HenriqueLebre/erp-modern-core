@@ -1,0 +1,15 @@
+D:\dev\Mordernizacao-ERP\erp-modern-core-father\erp-modern-core\api\src\Modules\Auth\Auth.Domain\bin\Debug\net8.0\Auth.Domain.deps.json
+D:\dev\Mordernizacao-ERP\erp-modern-core-father\erp-modern-core\api\src\Modules\Auth\Auth.Domain\bin\Debug\net8.0\Auth.Domain.dll
+D:\dev\Mordernizacao-ERP\erp-modern-core-father\erp-modern-core\api\src\Modules\Auth\Auth.Domain\bin\Debug\net8.0\Auth.Domain.pdb
+D:\dev\Mordernizacao-ERP\erp-modern-core-father\erp-modern-core\api\src\Modules\Auth\Auth.Domain\bin\Debug\net8.0\SharedKernel.Domain.dll
+D:\dev\Mordernizacao-ERP\erp-modern-core-father\erp-modern-core\api\src\Modules\Auth\Auth.Domain\bin\Debug\net8.0\SharedKernel.Domain.pdb
+D:\dev\Mordernizacao-ERP\erp-modern-core-father\erp-modern-core\api\src\Modules\Auth\Auth.Domain\obj\Debug\net8.0\Auth.Domain.csproj.AssemblyReference.cache
+D:\dev\Mordernizacao-ERP\erp-modern-core-father\erp-modern-core\api\src\Modules\Auth\Auth.Domain\obj\Debug\net8.0\Auth.Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\dev\Mordernizacao-ERP\erp-modern-core-father\erp-modern-core\api\src\Modules\Auth\Auth.Domain\obj\Debug\net8.0\Auth.Domain.AssemblyInfoInputs.cache
+D:\dev\Mordernizacao-ERP\erp-modern-core-father\erp-modern-core\api\src\Modules\Auth\Auth.Domain\obj\Debug\net8.0\Auth.Domain.AssemblyInfo.cs
+D:\dev\Mordernizacao-ERP\erp-modern-core-father\erp-modern-core\api\src\Modules\Auth\Auth.Domain\obj\Debug\net8.0\Auth.Domain.csproj.CoreCompileInputs.cache
+D:\dev\Mordernizacao-ERP\erp-modern-core-father\erp-modern-core\api\src\Modules\Auth\Auth.Domain\obj\Debug\net8.0\Auth.Dom.44AFD750.Up2Date
+D:\dev\Mordernizacao-ERP\erp-modern-core-father\erp-modern-core\api\src\Modules\Auth\Auth.Domain\obj\Debug\net8.0\Auth.Domain.dll
+D:\dev\Mordernizacao-ERP\erp-modern-core-father\erp-modern-core\api\src\Modules\Auth\Auth.Domain\obj\Debug\net8.0\refint\Auth.Domain.dll
+D:\dev\Mordernizacao-ERP\erp-modern-core-father\erp-modern-core\api\src\Modules\Auth\Auth.Domain\obj\Debug\net8.0\Auth.Domain.pdb
+D:\dev\Mordernizacao-ERP\erp-modern-core-father\erp-modern-core\api\src\Modules\Auth\Auth.Domain\obj\Debug\net8.0\ref\Auth.Domain.dll

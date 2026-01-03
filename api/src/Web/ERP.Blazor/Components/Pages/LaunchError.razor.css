@@ -1,0 +1,79 @@
+.launch-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 20px;
+}
+
+.launch-card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 600px;
+    padding: 50px 40px;
+    text-align: center;
+}
+
+.launch-icon {
+    font-size: 80px;
+    margin-bottom: 20px;
+}
+
+.launch-icon.error {
+    color: #dc3545;
+}
+
+.launch-card h2 {
+    color: #333;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.launch-card .lead {
+    color: #666;
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+.alert ol {
+    padding-left: 20px;
+}
+
+.alert li {
+    margin-bottom: 5px;
+}
+
+.manual-launch {
+    text-align: center;
+}
+
+.manual-launch h5 {
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.manual-launch .input-group {
+    max-width: 100%;
+}
+
+.manual-launch .form-control {
+    font-size: 12px;
+    background-color: white;
+}
+
+@media (max-width: 576px) {
+    .launch-card {
+        padding: 30px 20px;
+    }
+    
+    .launch-icon {
+        font-size: 60px;
+    }
+    
+    .launch-card h2 {
+        font-size: 22px;
+    }
+}

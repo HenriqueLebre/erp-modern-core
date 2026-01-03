@@ -1,0 +1,91 @@
+@page "/"
+
+<PageTitle>ModernERP - Sistema de Gestão</PageTitle>
+
+<section class="hero">
+    <span class="hero-badge">
+        <span>🚀</span>
+        <span>Sistema Moderno de ERP</span>
+    </span>
+    
+    <h1>Gestão Empresarial Simplificada</h1>
+    
+    <p>
+        Integração moderna entre autenticação segura e seu sistema legado.
+        Acesse o ERP de forma rápida, segura e automatizada.
+    </p>
+
+    <div class="hero-actions">
+        <a href="/login" class="btn btn-primary btn-lg">
+            <span>Fazer Login</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14"></path>
+                <path d="m12 5 7 7-7 7"></path>
+            </svg>
+        </a>
+    </div>
+</section>
+
+<div class="cards-grid">
+    <article class="card">
+        <div class="card-icon card-icon-primary">🔐</div>
+        <h3>Autenticação Segura</h3>
+        <p>Login com validação JWT e integração transparente com o sistema legado.</p>
+        <a href="/login" class="btn btn-ghost">
+            Acessar Sistema →
+        </a>
+    </article>
+
+    <article class="card">
+        <div class="card-icon card-icon-success">⚡</div>
+        <h3>Abertura Automática</h3>
+        <p>Após autenticação, o ERP é iniciado automaticamente via protocol handler.</p>
+    </article>
+</div>
+
+<section class="status-section">
+    <header class="status-section-header">
+        <span>📡</span>
+        <h2>Status do Sistema</h2>
+    </header>
+
+    <div class="status-grid">
+        <div class="status-item">
+            <span class="status-item-icon online">🗄️</span>
+            <div class="status-item-info">
+                <h4>Banco de Dados</h4>
+                <p>MySQL conectado</p>
+            </div>
+        </div>
+        
+        <div class="status-item">
+            <span class="status-item-icon online">🔑</span>
+            <div class="status-item-info">
+                <h4>Auth API</h4>
+                <p>Autenticação ativa</p>
+            </div>
+        </div>
+        
+        <div class="status-item">
+            <span class="status-item-icon online">🖥️</span>
+            <div class="status-item-info">
+                <h4>ERP Legado</h4>
+                <p>Pronto para uso</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="info-box">
+    <header class="info-box-header">
+        <span>💡</span>
+        <span>Como Funciona</span>
+    </header>
+    <ol>
+        <li>Acesse a página de <strong>Login</strong></li>
+        <li>Digite suas credenciais (usuário e senha)</li>
+        <li>O sistema valida na Auth API</li>
+        <li>Após autenticação, o ERP legado abre automaticamente</li>
+        <li>Você já estará logado no sistema!</li>
+    </ol>
+</section>

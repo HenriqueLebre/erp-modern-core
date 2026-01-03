@@ -1,0 +1,15 @@
+D:\dev\Mordernizacao-ERP\erp-modern-core-father\erp-modern-core\api\src\BuildingBlocks\SharedKernel.Application\bin\Debug\net8.0\SharedKernel.Application.deps.json
+D:\dev\Mordernizacao-ERP\erp-modern-core-father\erp-modern-core\api\src\BuildingBlocks\SharedKernel.Application\bin\Debug\net8.0\SharedKernel.Application.dll
+D:\dev\Mordernizacao-ERP\erp-modern-core-father\erp-modern-core\api\src\BuildingBlocks\SharedKernel.Application\bin\Debug\net8.0\SharedKernel.Application.pdb
+D:\dev\Mordernizacao-ERP\erp-modern-core-father\erp-modern-core\api\src\BuildingBlocks\SharedKernel.Application\bin\Debug\net8.0\SharedKernel.Domain.dll
+D:\dev\Mordernizacao-ERP\erp-modern-core-father\erp-modern-core\api\src\BuildingBlocks\SharedKernel.Application\bin\Debug\net8.0\SharedKernel.Domain.pdb
+D:\dev\Mordernizacao-ERP\erp-modern-core-father\erp-modern-core\api\src\BuildingBlocks\SharedKernel.Application\obj\Debug\net8.0\SharedKernel.Application.csproj.AssemblyReference.cache
+D:\dev\Mordernizacao-ERP\erp-modern-core-father\erp-modern-core\api\src\BuildingBlocks\SharedKernel.Application\obj\Debug\net8.0\SharedKernel.Application.GeneratedMSBuildEditorConfig.editorconfig
+D:\dev\Mordernizacao-ERP\erp-modern-core-father\erp-modern-core\api\src\BuildingBlocks\SharedKernel.Application\obj\Debug\net8.0\SharedKernel.Application.AssemblyInfoInputs.cache
+D:\dev\Mordernizacao-ERP\erp-modern-core-father\erp-modern-core\api\src\BuildingBlocks\SharedKernel.Application\obj\Debug\net8.0\SharedKernel.Application.AssemblyInfo.cs
+D:\dev\Mordernizacao-ERP\erp-modern-core-father\erp-modern-core\api\src\BuildingBlocks\SharedKernel.Application\obj\Debug\net8.0\SharedKernel.Application.csproj.CoreCompileInputs.cache
+D:\dev\Mordernizacao-ERP\erp-modern-core-father\erp-modern-core\api\src\BuildingBlocks\SharedKernel.Application\obj\Debug\net8.0\SharedKe.36922A9F.Up2Date
+D:\dev\Mordernizacao-ERP\erp-modern-core-father\erp-modern-core\api\src\BuildingBlocks\SharedKernel.Application\obj\Debug\net8.0\SharedKernel.Application.dll
+D:\dev\Mordernizacao-ERP\erp-modern-core-father\erp-modern-core\api\src\BuildingBlocks\SharedKernel.Application\obj\Debug\net8.0\refint\SharedKernel.Application.dll
+D:\dev\Mordernizacao-ERP\erp-modern-core-father\erp-modern-core\api\src\BuildingBlocks\SharedKernel.Application\obj\Debug\net8.0\SharedKernel.Application.pdb
+D:\dev\Mordernizacao-ERP\erp-modern-core-father\erp-modern-core\api\src\BuildingBlocks\SharedKernel.Application\obj\Debug\net8.0\ref\SharedKernel.Application.dll

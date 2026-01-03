@@ -1,0 +1,56 @@
+@page "/launch-success"
+@layout AuthLayout
+@using ERP.Blazor.Services
+@inject IAuthService AuthService
+@inject NavigationManager Navigation
+@rendermode InteractiveServer
+
+<PageTitle>ModernERP - Iniciando Sistema</PageTitle>
+
+<div class="auth-card">
+    <div class="status-icon status-icon-success">
+        ✓
+    </div>
+    
+    <h2 class="status-title">Login realizado com sucesso!</h2>
+    <p class="status-description">
+        O sistema ERP está sendo iniciado automaticamente...
+    </p>
+
+    <div class="loading-indicator">
+        <div class="spinner spinner-lg spinner-dark"></div>
+        <p>Aguarde enquanto o Sysfood.exe é aberto</p>
+    </div>
+
+    <div class="alert alert-info">
+        <span class="alert-icon">💡</span>
+        <span class="alert-content">
+            <strong>Dica:</strong> Se o sistema não abrir automaticamente, 
+            verifique se o SysfoodLauncher está instalado corretamente.
+        </span>
+    </div>
+
+    <div class="action-buttons center">
+        <a href="/login" class="btn btn-secondary">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m12 19-7-7 7-7"></path>
+                <path d="M19 12H5"></path>
+            </svg>
+            Voltar ao Login
+        </a>
+        <a href="/" class="btn btn-ghost">
+            Ir para Home
+        </a>
+    </div>
+</div>
+
+@code {
+    protected override async Task OnInitializedAsync()
+    {
+        var isAuth = await AuthService.IsAuthenticatedAsync();
+        if (!isAuth)
+        {
+            Navigation.NavigateTo("/login");        
+        }
+    }
+}

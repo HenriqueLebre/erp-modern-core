@@ -1,0 +1,170 @@
+@page "/login"
+@layout AuthLayout
+@using ERP.Blazor.Models
+@using ERP.Blazor.Services
+@inject IAuthService AuthService
+@inject NavigationManager NavigationManager
+@inject IJSRuntime JSRuntime
+@inject ILogger<Login> Logger
+@rendermode InteractiveServer
+
+<PageTitle>ModernERP - Entrar</PageTitle>
+
+<div class="auth-card">
+    <header class="auth-card-header">
+        <h2>Bem-vindo de volta</h2>
+        <p>Entre com suas credenciais para continuar</p>
+    </header>
+
+    <EditForm Model="@loginModel" OnValidSubmit="HandleLogin" FormName="loginForm">
+        <DataAnnotationsValidator />
+
+        @if (!string.IsNullOrEmpty(errorMessage))
+        {
+            <div class="alert alert-danger">
+                <span class="alert-icon">⚠️</span>
+                <span class="alert-content">@errorMessage</span>
+            </div>
+        }
+
+        <div class="form-group">
+            <label class="form-label" for="username">Usuário</label>
+            <div class="form-input-wrapper">
+                <span class="input-icon">👤</span>
+                <InputText id="username" 
+                           @bind-Value="loginModel.Username" 
+                           class="form-input" 
+                           placeholder="Digite seu usuário"
+                           disabled="@isLoading"
+                           autocomplete="username" />
+            </div>
+            <ValidationMessage For="@(() => loginModel.Username)" class="validation-message" />
+        </div>
+
+        <div class="form-group">
+            <label class="form-label" for="password">Senha</label>
+            <div class="form-input-wrapper">
+                <span class="input-icon">🔒</span>
+                <InputText id="password" 
+                           @bind-Value="loginModel.Password" 
+                           type="password" 
+                           class="form-input" 
+                           placeholder="Digite sua senha"
+                           disabled="@isLoading"
+                           autocomplete="current-password" />
+            </div>
+            <ValidationMessage For="@(() => loginModel.Password)" class="validation-message" />
+        </div>
+
+        <div class="form-group">
+            <label class="form-checkbox">
+                <InputCheckbox @bind-Value="loginModel.RememberMe" disabled="@isLoading" />
+                <span class="form-checkbox-label">Lembrar-me neste dispositivo</span>
+            </label>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-full btn-lg" disabled="@isLoading">
+            @if (isLoading)
+            {
+                <span class="spinner"></span>
+                <span>Entrando...</span>
+            }
+            else
+            {
+                <span>Entrar</span>
+            }
+        </button>
+    </EditForm>
+
+    <footer class="auth-footer">
+        <p>ModernERP v2.0 © @DateTime.Now.Year</p>
+    </footer>
+</div>
+
+@code {
+    [SupplyParameterFromForm]
+    private LoginModel loginModel { get; set; } = new();
+    
+    private string errorMessage = string.Empty;
+    private bool isLoading = false;
+    private LoginResult? loginResult = null;
+    private bool hasRendered = false;
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            hasRendered = true;
+        }
+        
+        if (hasRendered && loginResult != null && loginResult.Success)
+        {
+            _ = OpenERPAsync();
+        }
+    }
+
+    private async Task HandleLogin()
+    {
+        errorMessage = string.Empty;
+        isLoading = true;
+        loginResult = null;
+
+        try
+        {
+            var result = await AuthService.LoginAsync(loginModel.Username, loginModel.Password);
+
+            if (result.Success)
+            {
+                Logger.LogInformation("Login successful, preparing to launch ERP");
+                loginResult = result;
+                
+                await InvokeAsync(StateHasChanged);
+                
+                if (hasRendered)
+                {
+                    await OpenERPAsync();
+                }
+            }
+            else
+            {
+                errorMessage = result.ErrorMessage;
+            }
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Erro inesperado ao tentar fazer login: {ex.Message}";
+            Logger.LogError(ex, "Unexpected error during login");
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    private async Task OpenERPAsync()
+    {
+        if (loginResult == null || !loginResult.Success) return;
+
+        try
+        {
+            var launchUrl = $"sysfood://launch?token={Uri.EscapeDataString(loginResult.Token)}&user={Uri.EscapeDataString(loginResult.Username)}";
+
+            Logger.LogInformation("Opening ERP with protocol handler: {Url}", launchUrl);
+
+            await JSRuntime.InvokeVoidAsync("open", launchUrl, "_self");
+            
+            await Task.Delay(1000);
+            
+            NavigationManager.NavigateTo("/launch-success");
+        }
+        catch (Exception ex)
+        {
+            Logger.LogError(ex, "Error opening protocol handler");
+            NavigationManager.NavigateTo($"/launch-error?token={Uri.EscapeDataString(loginResult.Token)}&user={Uri.EscapeDataString(loginResult.Username)}");
+        }
+        finally
+        {
+            loginResult = null;
+        }
+    }
+}

@@ -1,0 +1,63 @@
+.launch-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 20px;
+}
+
+.launch-card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 500px;
+    padding: 50px 40px;
+    text-align: center;
+}
+
+.launch-icon {
+    font-size: 80px;
+    margin-bottom: 20px;
+}
+
+.launch-icon.success {
+    color: #28a745;
+}
+
+.launch-icon.error {
+    color: #dc3545;
+}
+
+.launch-card h2 {
+    color: #333;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.launch-card .lead {
+    color: #666;
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+.launch-status {
+    padding: 30px 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    margin: 20px 0;
+}
+
+.launch-status .spinner-border {
+    width: 3rem;
+    height: 3rem;
+}
+
+.alert {
+    text-align: left;
+}
+
+.alert i {
+    margin-right: 8px;
+}
