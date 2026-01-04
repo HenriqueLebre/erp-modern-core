@@ -422,3 +422,134 @@ PROCEDURE Main()
    ? "✅ Strangler Fig pattern - gradual migration while maintaining operation"
 
 RETURN
+*******************************************************************************
+* PROTOCOL HANDLER - Recebe chamada sysfood://
+*******************************************************************************
+FUNCTION ProtocolHandler(cUrl)
+    LOCAL cToken := ""
+    LOCAL cApiUrl := "http://localhost:5281"
+    LOCAL lValid := .F.
+    
+    * Extrair token da URL (sysfood://launch?token=XXX)
+    IF "token=" $ LOWER(cUrl)
+        cToken := SubStr(cUrl, At("token=", LOWER(cUrl)) + 6)
+        
+        * Remover possível & ou outros parâmetros
+        IF "&" $ cToken
+            cToken := Left(cToken, At("&", cToken) - 1)
+        ENDIF
+        
+        ? "🔐 Token recebido via protocol handler"
+        ? "Token:", Left(cToken, 50) + "..."
+        
+        * Validar token na API
+        lValid := ValidateToken(cApiUrl, cToken)
+        
+        IF lValid
+            ? "✅ Token válido! Abrindo ERP..."
+            
+            * Aqui você iniciaria sua aplicação principal
+            * Por enquanto, só mostramos mensagem
+            WAIT "ERP Autenticado! Pressione qualquer tecla..."
+            
+            RETURN .T.
+        ELSE
+            ? "❌ Token inválido!"
+            WAIT "Autenticação falhou. Pressione qualquer tecla..."
+            RETURN .F.
+        ENDIF
+    ELSE
+        ? "❌ Token não encontrado na URL"
+        RETURN .F.
+    ENDIF
+RETURN .F.
+
+*******************************************************************************
+* VALIDAR TOKEN NA API
+*******************************************************************************
+FUNCTION ValidateToken(cApiUrl, cToken)
+    LOCAL oHttp
+    LOCAL cResponse := ""
+    LOCAL lValid := .F.
+    LOCAL cUrl := cApiUrl + "/auth/validate"
+    
+    ? "🔍 Validando token na API..."
+    ? "URL:", cUrl
+    
+    TRY
+        * Criar objeto HTTP
+        oHttp := CreateObject("WinHttp.WinHttpRequest.5.1")
+        
+        * Configurar request
+        oHttp:Open("POST", cUrl, .F.)
+        oHttp:SetRequestHeader("Content-Type", "application/json")
+        
+        * Body com token
+        cBody := '{"token":"' + cToken + '"}'
+        
+        * Enviar request
+        oHttp:Send(cBody)
+        
+        * Ler resposta
+        cResponse := oHttp:ResponseText
+        
+        ? "Resposta API:", cResponse
+        
+        * Verificar se validação foi bem-sucedida
+        * (Ajuste de acordo com a resposta da sua API)
+        IF oHttp:Status == 200
+            lValid := .T.
+            ? "✅ Token validado com sucesso!"
+        ELSE
+            ? "❌ Token inválido (Status:", oHttp:Status, ")"
+        ENDIF
+        
+    CATCH oErr
+        ? "❌ Erro ao validar token:", oErr:Description
+        lValid := .F.
+    END TRY
+    
+RETURN lValid
+
+*******************************************************************************
+* MAIN - Ponto de entrada do programa
+*******************************************************************************
+PROCEDURE Main()
+    LOCAL cCommandLine := GetCommandLine()
+    
+    ? "============================================"
+    ? "  SysFood ERP - Protocol Handler"
+    ? "============================================"
+    ? ""
+    
+    * Se foi chamado via protocol handler (sysfood://...)
+    IF "sysfood://" $ LOWER(cCommandLine)
+        ? "📞 Chamado via protocol handler"
+        ? "Linha de comando:", cCommandLine
+        ? ""
+        
+        ProtocolHandler(cCommandLine)
+    ELSE
+        * Modo normal (sem protocol handler)
+        ? "ℹ️  Iniciando em modo normal..."
+        ? ""
+        
+        * Seu código normal do ERP aqui
+        WAIT "Modo normal. Pressione qualquer tecla..."
+    ENDIF
+    
+RETURN
+
+*******************************************************************************
+* GetCommandLine - Retorna linha de comando completa
+*******************************************************************************
+FUNCTION GetCommandLine()
+    LOCAL cLine := ""
+    LOCAL i
+    
+    * Concatenar todos os parâmetros
+    FOR i := 0 TO PCount()
+        cLine += hb_PValue(i) + " "
+    NEXT
+    
+RETURN AllTrim(cLine)

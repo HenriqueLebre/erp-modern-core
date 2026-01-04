@@ -1,91 +1,134 @@
 @page "/"
+@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.JSInterop
+@inject AuthenticationStateProvider AuthStateProvider
+@inject NavigationManager Navigation
+@inject IJSRuntime JSRuntime
 
-<PageTitle>ModernERP - Sistema de Gestão</PageTitle>
+<PageTitle>Home - ERP Modern</PageTitle>
 
-<section class="hero">
-    <span class="hero-badge">
-        <span>🚀</span>
-        <span>Sistema Moderno de ERP</span>
-    </span>
-    
-    <h1>Gestão Empresarial Simplificada</h1>
-    
-    <p>
-        Integração moderna entre autenticação segura e seu sistema legado.
-        Acesse o ERP de forma rápida, segura e automatizada.
-    </p>
-
-    <div class="hero-actions">
-        <a href="/login" class="btn btn-primary btn-lg">
-            <span>Fazer Login</span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M5 12h14"></path>
-                <path d="m12 5 7 7-7 7"></path>
-            </svg>
-        </a>
-    </div>
-</section>
-
-<div class="cards-grid">
-    <article class="card">
-        <div class="card-icon card-icon-primary">🔐</div>
-        <h3>Autenticação Segura</h3>
-        <p>Login com validação JWT e integração transparente com o sistema legado.</p>
-        <a href="/login" class="btn btn-ghost">
-            Acessar Sistema →
-        </a>
-    </article>
-
-    <article class="card">
-        <div class="card-icon card-icon-success">⚡</div>
-        <h3>Abertura Automática</h3>
-        <p>Após autenticação, o ERP é iniciado automaticamente via protocol handler.</p>
-    </article>
+<div class="container mt-5">
+    <AuthorizeView>
+        <Authorized>
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="card shadow">
+                        <div class="card-body text-center p-5">
+                            <h1 class="display-4 mb-4">✅ Autenticado com Sucesso!</h1>
+                            
+                            <div class="alert alert-success" role="alert">
+                                <h4 class="alert-heading">Bem-vindo, @context.User.Identity?.Name!</h4>
+                                <p>Você está autenticado e pronto para usar o sistema.</p>
+                            </div>
+                            
+                            <div class="d-grid gap-3 mt-4">
+                                <button class="btn btn-primary btn-lg" @onclick="OpenLegacyERP">
+                                    🚀 Abrir ERP Legado
+                                </button>
+                                
+                                <button class="btn btn-outline-secondary" @onclick="Logout">
+                                    🚪 Sair
+                                </button>
+                            </div>
+                            
+                            @if (!string.IsNullOrEmpty(statusMessage))
+                            {
+                                <div class="alert alert-info mt-4" role="alert">
+                                    @statusMessage
+                                </div>
+                            }
+                            
+                            @if (!string.IsNullOrEmpty(debugInfo))
+                            {
+                                <div class="alert alert-warning mt-4" role="alert">
+                                    <strong>Debug:</strong> @debugInfo
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </Authorized>
+        <NotAuthorized>
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="card shadow">
+                        <div class="card-body text-center p-5">
+                            <h2 class="mb-4">🔐 Acesso Restrito</h2>
+                            <p class="text-muted mb-4">Você precisa fazer login para acessar esta página.</p>
+                            <a href="/login" class="btn btn-primary btn-lg">
+                                Fazer Login
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </NotAuthorized>
+    </AuthorizeView>
 </div>
 
-<section class="status-section">
-    <header class="status-section-header">
-        <span>📡</span>
-        <h2>Status do Sistema</h2>
-    </header>
-
-    <div class="status-grid">
-        <div class="status-item">
-            <span class="status-item-icon online">🗄️</span>
-            <div class="status-item-info">
-                <h4>Banco de Dados</h4>
-                <p>MySQL conectado</p>
-            </div>
-        </div>
+@code {
+    private string? statusMessage;
+    private string? debugInfo;
+    private string? currentToken;
+    
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await AuthStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
         
-        <div class="status-item">
-            <span class="status-item-icon online">🔑</span>
-            <div class="status-item-info">
-                <h4>Auth API</h4>
-                <p>Autenticação ativa</p>
-            </div>
-        </div>
+        if (user.Identity?.IsAuthenticated == true)
+        {
+            // Tentar obter token de diferentes claims
+            currentToken = user.FindFirst("token")?.Value 
+                        ?? user.FindFirst("access_token")?.Value
+                        ?? user.FindFirst("jwt")?.Value;
+            
+            if (string.IsNullOrEmpty(currentToken))
+            {
+                debugInfo = "⚠️ Token não encontrado nos claims. Verifique CustomAuthStateProvider.";
+            }
+            else
+            {
+                debugInfo = $"✅ Token encontrado! ({currentToken.Length} caracteres)";
+            }
+        }
+    }
+    
+    private async Task OpenLegacyERP()
+    {
+        if (string.IsNullOrEmpty(currentToken))
+        {
+            statusMessage = "❌ Token não encontrado. Faça login novamente.";
+            debugInfo = "Token está vazio. Verifique se CustomAuthStateProvider está salvando o token nos claims.";
+            return;
+        }
         
-        <div class="status-item">
-            <span class="status-item-icon online">🖥️</span>
-            <div class="status-item-info">
-                <h4>ERP Legado</h4>
-                <p>Pronto para uso</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="info-box">
-    <header class="info-box-header">
-        <span>💡</span>
-        <span>Como Funciona</span>
-    </header>
-    <ol>
-        <li>Acesse a página de <strong>Login</strong></li>
-        <li>Digite suas credenciais (usuário e senha)</li>
-        <li>O sistema valida na Auth API</li>
-        <li>Após autenticação, o ERP legado abre automaticamente</li>
-        <li>Você já estará logado no sistema!</li>
-    </ol>
-</section>
+        try
+        {
+            // Construir URL do protocol handler
+            var protocolUrl = $"sysfood://launch?token={currentToken}";
+            
+            statusMessage = "🔄 Abrindo ERP legado... Se nada acontecer, verifique se o protocol handler está registrado.";
+            debugInfo = $"Protocol URL: {protocolUrl.Substring(0, Math.Min(100, protocolUrl.Length))}...";
+            
+            // Abrir protocol handler (abre aplicação externa)
+            await JSRuntime.InvokeVoidAsync("open", protocolUrl, "_self");
+            
+            // Aguardar 2 segundos
+            await Task.Delay(2000);
+            
+            statusMessage = "✅ Comando enviado! O ERP deve abrir em instantes.";
+        }
+        catch (Exception ex)
+        {
+            statusMessage = $"❌ Erro ao abrir ERP: {ex.Message}";
+            debugInfo = $"Exception: {ex.GetType().Name}";
+        }
+    }
+    
+    private void Logout()
+    {
+        Navigation.NavigateTo("/logout", true);
+    }
+}

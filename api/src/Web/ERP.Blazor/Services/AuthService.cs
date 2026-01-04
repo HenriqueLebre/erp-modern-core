@@ -10,6 +10,7 @@ public class AuthService : IAuthService
 {
     private readonly IHttpClientFactory _httpClientFactory;
     private readonly ILogger<AuthService> _logger;
+    private LoginResult? _currentUser;  // ← ADICIONAR ESTA LINHA!
 
     public AuthService(
         IHttpClientFactory httpClientFactory,
@@ -51,7 +52,10 @@ public class AuthService : IAuthService
                         ExpiresAt = authResponse.ExpiresAt
                     };
 
-                    _logger.LogInformation("Login successful for user: {Username}", username);
+                    // ✅ ARMAZENAR USUÁRIO ATUAL!
+                    _currentUser = loginResult;
+
+                    _logger.LogInformation("Login successful for user: {Username}. Token stored.", username);
 
                     return loginResult;
                 }
@@ -103,21 +107,22 @@ public class AuthService : IAuthService
     public Task LogoutAsync()
     {
         _logger.LogInformation("Logging out user");
+        _currentUser = null;  // ✅ LIMPAR USUÁRIO
         return Task.CompletedTask;
     }
 
     public Task<bool> IsAuthenticatedAsync()
     {
-        return Task.FromResult(false);
+        return Task.FromResult(_currentUser != null && _currentUser.Success);
     }
 
     public Task<string?> GetTokenAsync()
     {
-        return Task.FromResult<string?>(null);
+        return Task.FromResult(_currentUser?.Token);
     }
 
     public Task<LoginResult?> GetCurrentUserAsync()
     {
-        return Task.FromResult<LoginResult?>(null);
+        return Task.FromResult(_currentUser);  // ✅ RETORNAR USUÁRIO ARMAZENADO
     }
 }

@@ -151,7 +151,7 @@
 
             Logger.LogInformation("Opening ERP with protocol handler: {Url}", launchUrl);
 
-            await JSRuntime.InvokeVoidAsync("open", launchUrl, "_self");
+            await JSRuntime.InvokeVoidAsync("open", launchUrl, "_blank");
             
             await Task.Delay(1000);
             
