@@ -1,348 +1,320 @@
 /* ==============================================
-   LOGIN PAGE — Modern Minimal (CSS-only)
-   Mantém as classes existentes. Sem alterar Razor.
-   Compatível com inputs nativos e com Blazor components via ::deep.
+   Login.razor.css — Premium Minimal (Dark, layout-friendly)
+   - Não mexe no Razor
+   - Estiliza InputText/ValidationMessage via ::deep
    ============================================== */
 
 .login-container {
-  /* Tokens (colocados no container para funcionar bem em .razor.css) */
-  color-scheme: light;
+    width: 100%;
+    max-width: 440px;
+    margin: 0 auto;
+    animation: fadeIn 200ms ease-out;
 
-  /* Spacing scale (4/8/12/16/24/32/40) */
-  --sp-1: 4px;
-  --sp-2: 8px;
-  --sp-3: 12px;
-  --sp-4: 16px;
-  --sp-5: 24px;
-  --sp-6: 32px;
-  --sp-7: 40px;
+    /* tokens locais */
+    --sp-1: 4px;
+    --sp-2: 8px;
+    --sp-3: 12px;
+    --sp-4: 16px;
+    --sp-5: 24px;
+    --sp-6: 32px;
 
-  /* Radius */
-  --r-md: 12px;
-  --r-lg: 16px;
-  --r-xl: 20px;
+    --r-md: 12px;
+    --r-lg: 16px;
+    --r-xl: 20px;
 
-  /* Palette (reduzida, alto contraste) */
-  --page-bg: #f6f7fb;
-  --card-bg: #ffffff;
-  --card-border: rgba(15, 23, 42, 0.10);
+    --text: rgba(255, 255, 255, 0.92);
+    --muted: rgba(255, 255, 255, 0.62);
+    --subtle: rgba(255, 255, 255, 0.44);
 
-  --text: #0f172a;
-  --muted: rgba(15, 23, 42, 0.62);
-  --subtle: rgba(15, 23, 42, 0.46);
+    --card-bg: rgba(255, 255, 255, 0.04);
+    --card-border: rgba(255, 255, 255, 0.10);
 
-  --field-bg: #ffffff;
-  --field-border: rgba(15, 23, 42, 0.16);
-  --field-border-hover: rgba(15, 23, 42, 0.26);
+    --field-bg: rgba(255, 255, 255, 0.05);
+    --field-border: rgba(255, 255, 255, 0.14);
+    --field-border-hover: rgba(255, 255, 255, 0.22);
 
-  --brand: #4f46e5;         /* indigo */
-  --brand-pressed: #4338ca;
-  --ring: rgba(79, 70, 229, 0.22);
+    --brand: #6366f1;
+    --brand-pressed: #4f46e5;
+    --ring: rgba(99, 102, 241, 0.26);
 
-  --danger: #dc2626;
-  --danger-bg: rgba(220, 38, 38, 0.08);
-  --danger-border: rgba(220, 38, 38, 0.20);
+    --danger: #f87171;
+    --danger-bg: rgba(248, 113, 113, 0.10);
+    --danger-border: rgba(248, 113, 113, 0.22);
 
-  --shadow: 0 18px 50px rgba(15, 23, 42, 0.10);
-
-  width: 100%;
-  max-width: 440px;
-  margin-inline: auto;
-  padding: var(--sp-6) var(--sp-4);
-  animation: fadeIn 240ms ease-out;
+    --shadow: 0 18px 55px rgba(0, 0, 0, 0.55);
 }
-
-/* Se você quiser que a área ao redor do card fique com fundo suave
-   sem mexer no layout global, pode descomentar isto caso a container
-   realmente ocupe a área da página:
-*/
-/*
-.login-container {
-  min-height: 100svh;
-  display: grid;
-  place-items: center;
-  background:
-    radial-gradient(1200px 600px at 50% 0%, rgba(79, 70, 229, 0.10), transparent 55%),
-    var(--page-bg);
-}
-*/
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(8px); }
-  to   { opacity: 1; transform: translateY(0); }
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
 }
 
 /* Card */
 .login-box {
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  border-radius: var(--r-xl);
-  padding: var(--sp-7);
-  box-shadow: var(--shadow);
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--r-xl);
+    padding: var(--sp-6);
+    box-shadow: var(--shadow);
+
+    /* Glass (sutil). Se o browser não suportar, segue ok. */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
 @media (max-width: 480px) {
-  .login-container { padding: var(--sp-5) var(--sp-4); }
-  .login-box {
-    padding: var(--sp-6);
-    border-radius: var(--r-lg);
-  }
+    .login-box {
+        padding: 24px;
+        border-radius: var(--r-lg);
+    }
 }
 
 /* Header */
 .login-header {
-  text-align: center;
-  margin-bottom: var(--sp-5);
+    text-align: center;
+    margin-bottom: var(--sp-5);
 }
 
 .login-header h1 {
-  font-size: 1.6rem;
-  font-weight: 720;
-  color: var(--text);
-  margin: 0 0 var(--sp-2);
-  letter-spacing: -0.03em;
+    font-size: 1.5rem;
+    font-weight: 720;
+    color: var(--text);
+    margin: 0 0 var(--sp-2);
+    letter-spacing: -0.03em;
 }
 
 .login-header p {
-  font-size: 0.95rem;
-  color: var(--muted);
-  margin: 0;
+    font-size: 0.95rem;
+    color: var(--muted);
+    margin: 0;
 }
 
 /* Fields */
 .field {
-  margin-bottom: var(--sp-4);
+    margin-bottom: var(--sp-4);
 }
 
 .field label {
-  display: block;
-  margin-bottom: var(--sp-2);
-  font-size: 0.825rem;
-  font-weight: 650;
-  color: var(--muted);
+    display: block;
+    margin-bottom: var(--sp-2);
+    font-size: 0.82rem;
+    font-weight: 650;
+    color: var(--muted);
 }
 
-/* Inputs — cobre input nativo e Blazor component via ::deep */
+/* InputText -> precisa ::deep para atingir o <input> real */
 .field input,
 .field ::deep input {
-  width: 100%;
-  min-height: 44px;
-  padding: 12px 14px;
+    width: 100%;
+    min-height: 44px;
+    padding: 12px 14px;
 
-  font-family: inherit;
-  font-size: 0.95rem;
-  color: var(--text);
+    font: inherit;
+    font-size: 0.95rem;
+    color: var(--text);
 
-  background: var(--field-bg);
-  border: 1px solid var(--field-border);
-  border-radius: var(--r-md);
+    background: var(--field-bg);
+    border: 1px solid var(--field-border);
+    border-radius: var(--r-md);
 
-  outline: none;
-  transition: border-color 180ms ease, box-shadow 180ms ease, background 180ms ease;
+    outline: none;
+    transition: border-color 180ms ease, box-shadow 180ms ease, background 180ms ease;
 }
 
 .field input::placeholder,
 .field ::deep input::placeholder {
-  color: var(--subtle);
+    color: var(--subtle);
 }
 
 .field input:hover,
 .field ::deep input:hover {
-  border-color: var(--field-border-hover);
+    border-color: var(--field-border-hover);
 }
 
-/* Focus (acessível e “clean”) */
+/* Focus visível */
 .field input:focus-visible,
 .field ::deep input:focus-visible {
-  border-color: rgba(79, 70, 229, 0.60);
-  box-shadow: 0 0 0 4px var(--ring);
+    border-color: rgba(99, 102, 241, 0.65);
+    box-shadow: 0 0 0 4px var(--ring);
 }
 
 /* Disabled */
 .field input:disabled,
 .field ::deep input:disabled {
-  opacity: 0.72;
-  cursor: not-allowed;
-  background: rgba(15, 23, 42, 0.03);
+    opacity: 0.70;
+    cursor: not-allowed;
+    background: rgba(255, 255, 255, 0.035);
 }
 
-/* Invalid (sem mudar Razor): funciona se você já seta aria-invalid ou usa classe invalid do Blazor */
+/* ValidationMessage do Blazor */
+.field .validation-message,
+.field ::deep .validation-message {
+    margin-top: 6px;
+    font-size: 0.78rem;
+    color: var(--danger);
+    line-height: 1.3;
+}
+
+/* Se algum input vier com aria-invalid/class invalid */
 .field input[aria-invalid="true"],
 .field ::deep input[aria-invalid="true"],
 .field input.invalid,
 .field ::deep input.invalid {
-  border-color: rgba(220, 38, 38, 0.55);
-  box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.12);
-}
-
-/* Validation message (Blazor) */
-.field .validation-message,
-.field ::deep .validation-message {
-  margin-top: 6px;
-  font-size: 0.78rem;
-  color: var(--danger);
-  line-height: 1.3;
+    border-color: rgba(248, 113, 113, 0.55);
+    box-shadow: 0 0 0 4px rgba(248, 113, 113, 0.14);
 }
 
 /* Checkbox row */
 .field-row {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: var(--sp-3);
-  margin: var(--sp-2) 0 var(--sp-5);
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin: var(--sp-2) 0 var(--sp-5);
 }
 
-/* Checkbox */
 .checkbox {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--sp-2);
-  cursor: pointer;
-  user-select: none;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-2);
+    cursor: pointer;
+    user-select: none;
 }
 
 .checkbox input[type="checkbox"],
 .checkbox ::deep input[type="checkbox"] {
-  width: 16px;
-  height: 16px;
-  border-radius: 5px;
-  border: 1px solid var(--field-border);
-  background: var(--field-bg);
-  accent-color: var(--brand);
+    width: 16px;
+    height: 16px;
+    accent-color: var(--brand);
 }
 
 .checkbox span {
-  font-size: 0.9rem;
-  color: var(--muted);
+    font-size: 0.9rem;
+    color: var(--muted);
 }
 
-/* Button (premium minimal: menos “show”, mais corporativo) */
+/* Button */
 .btn-primary {
-  width: 100%;
-  min-height: 46px;
+    width: 100%;
+    min-height: 46px;
 
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--sp-2);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--sp-2);
 
-  padding: 12px 16px;
-  font-size: 0.95rem;
-  font-weight: 720;
-  font-family: inherit;
+    padding: 12px 16px;
+    font: inherit;
+    font-size: 0.95rem;
+    font-weight: 720;
 
-  color: #ffffff;
-  border: 1px solid rgba(79, 70, 229, 0.22);
-  border-radius: var(--r-lg);
-  cursor: pointer;
+    color: #fff;
+    border: 1px solid rgba(99, 102, 241, 0.28);
+    border-radius: var(--r-lg);
+    cursor: pointer;
 
-  /* “Big tech” feel: sólido com leve highlight */
-  background: linear-gradient(180deg, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0.00) 55%),
-              var(--brand);
+    background:
+      linear-gradient(180deg, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0.00) 55%),
+      var(--brand);
 
-  box-shadow: 0 10px 24px rgba(79, 70, 229, 0.20);
-  transition: transform 180ms ease, box-shadow 180ms ease, filter 180ms ease, opacity 180ms ease;
+    box-shadow: 0 12px 30px rgba(99, 102, 241, 0.18);
+    transition: transform 180ms ease, box-shadow 180ms ease, filter 180ms ease, opacity 180ms ease;
 }
 
 .btn-primary:hover:not(:disabled) {
-  transform: translateY(-1px);
-  box-shadow: 0 14px 30px rgba(79, 70, 229, 0.24);
-  filter: brightness(1.02);
+    transform: translateY(-1px);
+    box-shadow: 0 16px 36px rgba(99, 102, 241, 0.22);
+    filter: brightness(1.02);
 }
 
 .btn-primary:active:not(:disabled) {
-  transform: translateY(0);
-  background: linear-gradient(180deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.00) 55%),
-              var(--brand-pressed);
+    transform: translateY(0);
+    background:
+      linear-gradient(180deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.00) 55%),
+      var(--brand-pressed);
 }
 
 .btn-primary:focus-visible {
-  outline: none;
-  box-shadow: 0 0 0 4px var(--ring), 0 10px 24px rgba(79, 70, 229, 0.20);
+    outline: none;
+    box-shadow: 0 0 0 4px var(--ring), 0 12px 30px rgba(99, 102, 241, 0.18);
 }
 
 .btn-primary:disabled {
-  opacity: 0.78;
-  cursor: not-allowed;
-  transform: none;
+    opacity: 0.78;
+    cursor: not-allowed;
+    transform: none;
 }
 
-/* Icon sizing (se existir) */
 .btn-primary svg {
-  width: 16px;
-  height: 16px;
+    width: 16px;
+    height: 16px;
 }
 
-/* Spinner (mantém sua classe) */
+/* Spinner SVG já existe no seu Razor */
 .spinner {
-  width: 18px;
-  height: 18px;
-  border-radius: 999px;
-  border: 2px solid rgba(255, 255, 255, 0.35);
-  border-top-color: rgba(255, 255, 255, 0.95);
-  animation: spin 900ms linear infinite;
+    width: 18px;
+    height: 18px;
+    animation: spin 900ms linear infinite;
 }
 
 @keyframes spin { to { transform: rotate(360deg); } }
 
 /* Error message (global) */
 .error-message {
-  display: flex;
-  align-items: flex-start;
-  gap: var(--sp-3);
+    display: flex;
+    align-items: flex-start;
+    gap: var(--sp-3);
 
-  padding: var(--sp-3) var(--sp-4);
-  margin-bottom: var(--sp-4);
+    padding: var(--sp-3) var(--sp-4);
+    margin-bottom: var(--sp-4);
 
-  background: var(--danger-bg);
-  border: 1px solid var(--danger-border);
-  border-radius: var(--r-lg);
+    background: var(--danger-bg);
+    border: 1px solid var(--danger-border);
+    border-radius: var(--r-lg);
 }
 
 .error-message svg {
-  width: 18px;
-  height: 18px;
-  color: var(--danger);
-  flex-shrink: 0;
-  margin-top: 1px;
+    width: 18px;
+    height: 18px;
+    color: var(--danger);
+    flex-shrink: 0;
+    margin-top: 1px;
 }
 
 .error-message span {
-  font-size: 0.875rem;
-  color: var(--text);
-  line-height: 1.45;
+    font-size: 0.875rem;
+    color: var(--text);
+    line-height: 1.45;
 }
 
 /* Footer */
 .login-footer {
-  margin-top: var(--sp-6);
-  padding-top: var(--sp-4);
-  border-top: 1px solid var(--card-border);
-  text-align: center;
+    margin-top: var(--sp-6);
+    padding-top: var(--sp-4);
+    border-top: 1px solid rgba(255, 255, 255, 0.10);
+    text-align: center;
 }
 
 .status-indicator {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--sp-2);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-2);
 }
 
 .status-dot {
-  width: 7px;
-  height: 7px;
-  background: #16a34a;
-  border-radius: 50%;
-  box-shadow: 0 0 0 4px rgba(22, 163, 74, 0.12);
+    width: 7px;
+    height: 7px;
+    background: #22c55e;
+    border-radius: 50%;
+    box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.14);
 }
 
 .status-indicator span {
-  font-size: 0.78rem;
-  color: var(--subtle);
+    font-size: 0.78rem;
+    color: var(--subtle);
 }
 
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  .login-container { animation: none; }
-  * { transition: none !important; }
+    .login-container { animation: none; }
+    * { transition: none !important; }
 }
