@@ -1,111 +1,348 @@
+/* ==============================================
+   LOGIN PAGE — Modern Minimal (CSS-only)
+   Mantém as classes existentes. Sem alterar Razor.
+   Compatível com inputs nativos e com Blazor components via ::deep.
+   ============================================== */
+
 .login-container {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    padding: 20px;
+  /* Tokens (colocados no container para funcionar bem em .razor.css) */
+  color-scheme: light;
+
+  /* Spacing scale (4/8/12/16/24/32/40) */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+  --sp-7: 40px;
+
+  /* Radius */
+  --r-md: 12px;
+  --r-lg: 16px;
+  --r-xl: 20px;
+
+  /* Palette (reduzida, alto contraste) */
+  --page-bg: #f6f7fb;
+  --card-bg: #ffffff;
+  --card-border: rgba(15, 23, 42, 0.10);
+
+  --text: #0f172a;
+  --muted: rgba(15, 23, 42, 0.62);
+  --subtle: rgba(15, 23, 42, 0.46);
+
+  --field-bg: #ffffff;
+  --field-border: rgba(15, 23, 42, 0.16);
+  --field-border-hover: rgba(15, 23, 42, 0.26);
+
+  --brand: #4f46e5;         /* indigo */
+  --brand-pressed: #4338ca;
+  --ring: rgba(79, 70, 229, 0.22);
+
+  --danger: #dc2626;
+  --danger-bg: rgba(220, 38, 38, 0.08);
+  --danger-border: rgba(220, 38, 38, 0.20);
+
+  --shadow: 0 18px 50px rgba(15, 23, 42, 0.10);
+
+  width: 100%;
+  max-width: 440px;
+  margin-inline: auto;
+  padding: var(--sp-6) var(--sp-4);
+  animation: fadeIn 240ms ease-out;
 }
 
-.login-card {
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-    width: 100%;
-    max-width: 420px;
-    padding: 40px;
+/* Se você quiser que a área ao redor do card fique com fundo suave
+   sem mexer no layout global, pode descomentar isto caso a container
+   realmente ocupe a área da página:
+*/
+/*
+.login-container {
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(1200px 600px at 50% 0%, rgba(79, 70, 229, 0.10), transparent 55%),
+    var(--page-bg);
+}
+*/
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
+/* Card */
+.login-box {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--r-xl);
+  padding: var(--sp-7);
+  box-shadow: var(--shadow);
+}
+
+@media (max-width: 480px) {
+  .login-container { padding: var(--sp-5) var(--sp-4); }
+  .login-box {
+    padding: var(--sp-6);
+    border-radius: var(--r-lg);
+  }
+}
+
+/* Header */
 .login-header {
-    text-align: center;
-    margin-bottom: 30px;
+  text-align: center;
+  margin-bottom: var(--sp-5);
 }
 
-.login-header h2 {
-    color: #333;
-    margin-bottom: 10px;
-    font-weight: 600;
+.login-header h1 {
+  font-size: 1.6rem;
+  font-weight: 720;
+  color: var(--text);
+  margin: 0 0 var(--sp-2);
+  letter-spacing: -0.03em;
 }
 
-.login-header .text-muted {
-    font-size: 14px;
-    color: #666;
+.login-header p {
+  font-size: 0.95rem;
+  color: var(--muted);
+  margin: 0;
 }
 
-.login-form .form-label {
-    font-weight: 500;
-    color: #333;
-    margin-bottom: 8px;
+/* Fields */
+.field {
+  margin-bottom: var(--sp-4);
 }
 
-.login-form .input-group-text {
-    background-color: #f8f9fa;
-    border-right: none;
+.field label {
+  display: block;
+  margin-bottom: var(--sp-2);
+  font-size: 0.825rem;
+  font-weight: 650;
+  color: var(--muted);
 }
 
-.login-form .form-control {
-    border-left: none;
-    padding: 10px 15px;
+/* Inputs — cobre input nativo e Blazor component via ::deep */
+.field input,
+.field ::deep input {
+  width: 100%;
+  min-height: 44px;
+  padding: 12px 14px;
+
+  font-family: inherit;
+  font-size: 0.95rem;
+  color: var(--text);
+
+  background: var(--field-bg);
+  border: 1px solid var(--field-border);
+  border-radius: var(--r-md);
+
+  outline: none;
+  transition: border-color 180ms ease, box-shadow 180ms ease, background 180ms ease;
 }
 
-.login-form .form-control:focus {
-    box-shadow: none;
-    border-color: #667eea;
+.field input::placeholder,
+.field ::deep input::placeholder {
+  color: var(--subtle);
 }
 
-.login-form .input-group-text {
-    border-color: #ced4da;
+.field input:hover,
+.field ::deep input:hover {
+  border-color: var(--field-border-hover);
 }
 
-.login-form .form-control:focus + .input-group-text,
-.login-form .input-group:focus-within .input-group-text {
-    border-color: #667eea;
+/* Focus (acessível e “clean”) */
+.field input:focus-visible,
+.field ::deep input:focus-visible {
+  border-color: rgba(79, 70, 229, 0.60);
+  box-shadow: 0 0 0 4px var(--ring);
 }
 
-.login-form .btn-primary {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    border: none;
-    padding: 12px;
-    font-weight: 500;
-    transition: transform 0.2s;
+/* Disabled */
+.field input:disabled,
+.field ::deep input:disabled {
+  opacity: 0.72;
+  cursor: not-allowed;
+  background: rgba(15, 23, 42, 0.03);
 }
 
-.login-form .btn-primary:hover:not(:disabled) {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+/* Invalid (sem mudar Razor): funciona se você já seta aria-invalid ou usa classe invalid do Blazor */
+.field input[aria-invalid="true"],
+.field ::deep input[aria-invalid="true"],
+.field input.invalid,
+.field ::deep input.invalid {
+  border-color: rgba(220, 38, 38, 0.55);
+  box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.12);
 }
 
-.login-form .btn-primary:active:not(:disabled) {
-    transform: translateY(0);
+/* Validation message (Blazor) */
+.field .validation-message,
+.field ::deep .validation-message {
+  margin-top: 6px;
+  font-size: 0.78rem;
+  color: var(--danger);
+  line-height: 1.3;
 }
 
-.alert {
-    border-radius: 8px;
-    padding: 12px 16px;
-    margin-bottom: 20px;
+/* Checkbox row */
+.field-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--sp-3);
+  margin: var(--sp-2) 0 var(--sp-5);
 }
 
-.alert i {
-    margin-right: 8px;
+/* Checkbox */
+.checkbox {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  cursor: pointer;
+  user-select: none;
 }
 
+.checkbox input[type="checkbox"],
+.checkbox ::deep input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  border-radius: 5px;
+  border: 1px solid var(--field-border);
+  background: var(--field-bg);
+  accent-color: var(--brand);
+}
+
+.checkbox span {
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+/* Button (premium minimal: menos “show”, mais corporativo) */
+.btn-primary {
+  width: 100%;
+  min-height: 46px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+
+  padding: 12px 16px;
+  font-size: 0.95rem;
+  font-weight: 720;
+  font-family: inherit;
+
+  color: #ffffff;
+  border: 1px solid rgba(79, 70, 229, 0.22);
+  border-radius: var(--r-lg);
+  cursor: pointer;
+
+  /* “Big tech” feel: sólido com leve highlight */
+  background: linear-gradient(180deg, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0.00) 55%),
+              var(--brand);
+
+  box-shadow: 0 10px 24px rgba(79, 70, 229, 0.20);
+  transition: transform 180ms ease, box-shadow 180ms ease, filter 180ms ease, opacity 180ms ease;
+}
+
+.btn-primary:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 30px rgba(79, 70, 229, 0.24);
+  filter: brightness(1.02);
+}
+
+.btn-primary:active:not(:disabled) {
+  transform: translateY(0);
+  background: linear-gradient(180deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.00) 55%),
+              var(--brand-pressed);
+}
+
+.btn-primary:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px var(--ring), 0 10px 24px rgba(79, 70, 229, 0.20);
+}
+
+.btn-primary:disabled {
+  opacity: 0.78;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Icon sizing (se existir) */
+.btn-primary svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Spinner (mantém sua classe) */
+.spinner {
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-top-color: rgba(255, 255, 255, 0.95);
+  animation: spin 900ms linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Error message (global) */
+.error-message {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-3);
+
+  padding: var(--sp-3) var(--sp-4);
+  margin-bottom: var(--sp-4);
+
+  background: var(--danger-bg);
+  border: 1px solid var(--danger-border);
+  border-radius: var(--r-lg);
+}
+
+.error-message svg {
+  width: 18px;
+  height: 18px;
+  color: var(--danger);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.error-message span {
+  font-size: 0.875rem;
+  color: var(--text);
+  line-height: 1.45;
+}
+
+/* Footer */
 .login-footer {
-    margin-top: 20px;
-    padding-top: 20px;
-    border-top: 1px solid #e9ecef;
+  margin-top: var(--sp-6);
+  padding-top: var(--sp-4);
+  border-top: 1px solid var(--card-border);
+  text-align: center;
 }
 
-.spinner-border-sm {
-    width: 1rem;
-    height: 1rem;
+.status-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
 }
 
-@media (max-width: 576px) {
-    .login-card {
-        padding: 30px 20px;
-    }
-    
-    .login-header h2 {
-        font-size: 24px;
-    }
+.status-dot {
+  width: 7px;
+  height: 7px;
+  background: #16a34a;
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px rgba(22, 163, 74, 0.12);
+}
+
+.status-indicator span {
+  font-size: 0.78rem;
+  color: var(--subtle);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .login-container { animation: none; }
+  * { transition: none !important; }
 }

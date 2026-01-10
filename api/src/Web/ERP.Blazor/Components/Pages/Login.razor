@@ -8,77 +8,84 @@
 @inject ILogger<Login> Logger
 @rendermode InteractiveServer
 
-<PageTitle>ModernERP - Entrar</PageTitle>
+<PageTitle>SysFood · Login</PageTitle>
 
-<div class="auth-card">
-    <header class="auth-card-header">
-        <h2>Bem-vindo de volta</h2>
-        <p>Entre com suas credenciais para continuar</p>
-    </header>
+<div class="login-container">
+    <div class="login-box">
+        @* Header *@
+        <div class="login-header">
+            <h1>Welcome back</h1>
+            <p>Sign in to continue to SysFood</p>
+        </div>
 
-    <EditForm Model="@loginModel" OnValidSubmit="HandleLogin" FormName="loginForm">
-        <DataAnnotationsValidator />
+        @* Form *@
+        <EditForm Model="@loginModel" OnValidSubmit="HandleLogin" FormName="loginForm">
+            <DataAnnotationsValidator />
 
-        @if (!string.IsNullOrEmpty(errorMessage))
-        {
-            <div class="alert alert-danger">
-                <span class="alert-icon">⚠️</span>
-                <span class="alert-content">@errorMessage</span>
-            </div>
-        }
+            @if (!string.IsNullOrEmpty(errorMessage))
+            {
+                <div class="error-message">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                    </svg>
+                    <span>@errorMessage</span>
+                </div>
+            }
 
-        <div class="form-group">
-            <label class="form-label" for="username">Usuário</label>
-            <div class="form-input-wrapper">
-                <span class="input-icon">👤</span>
+            <div class="field">
+                <label for="username">Username</label>
                 <InputText id="username" 
                            @bind-Value="loginModel.Username" 
-                           class="form-input" 
-                           placeholder="Digite seu usuário"
+                           placeholder="Enter your username"
                            disabled="@isLoading"
                            autocomplete="username" />
+                <ValidationMessage For="@(() => loginModel.Username)" />
             </div>
-            <ValidationMessage For="@(() => loginModel.Username)" class="validation-message" />
-        </div>
 
-        <div class="form-group">
-            <label class="form-label" for="password">Senha</label>
-            <div class="form-input-wrapper">
-                <span class="input-icon">🔒</span>
+            <div class="field">
+                <label for="password">Password</label>
                 <InputText id="password" 
                            @bind-Value="loginModel.Password" 
-                           type="password" 
-                           class="form-input" 
-                           placeholder="Digite sua senha"
+                           type="password"
+                           placeholder="Enter your password"
                            disabled="@isLoading"
                            autocomplete="current-password" />
+                <ValidationMessage For="@(() => loginModel.Password)" />
             </div>
-            <ValidationMessage For="@(() => loginModel.Password)" class="validation-message" />
+
+            <div class="field-row">
+                <label class="checkbox">
+                    <InputCheckbox @bind-Value="loginModel.RememberMe" disabled="@isLoading" />
+                    <span>Remember me</span>
+                </label>
+            </div>
+
+            <button type="submit" class="btn-primary" disabled="@isLoading">
+                @if (isLoading)
+                {
+                    <svg class="spinner" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-dasharray="31.4 31.4" />
+                    </svg>
+                    <span>Signing in...</span>
+                }
+                else
+                {
+                    <span>Sign in</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clip-rule="evenodd" />
+                    </svg>
+                }
+            </button>
+        </EditForm>
+
+        @* Footer *@
+        <div class="login-footer">
+            <div class="status-indicator">
+                <span class="status-dot"></span>
+                <span>All systems operational</span>
+            </div>
         </div>
-
-        <div class="form-group">
-            <label class="form-checkbox">
-                <InputCheckbox @bind-Value="loginModel.RememberMe" disabled="@isLoading" />
-                <span class="form-checkbox-label">Lembrar-me neste dispositivo</span>
-            </label>
-        </div>
-
-        <button type="submit" class="btn btn-primary btn-full btn-lg" disabled="@isLoading">
-            @if (isLoading)
-            {
-                <span class="spinner"></span>
-                <span>Entrando...</span>
-            }
-            else
-            {
-                <span>Entrar</span>
-            }
-        </button>
-    </EditForm>
-
-    <footer class="auth-footer">
-        <p>ModernERP v2.0 © @DateTime.Now.Year</p>
-    </footer>
+    </div>
 </div>
 
 @code {
@@ -132,7 +139,7 @@
         }
         catch (Exception ex)
         {
-            errorMessage = $"Erro inesperado ao tentar fazer login: {ex.Message}";
+            errorMessage = $"An unexpected error occurred. Please try again.";
             Logger.LogError(ex, "Unexpected error during login");
         }
         finally

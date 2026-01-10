@@ -1,44 +1,389 @@
 @inherits LayoutComponentBase
 
-<div class="auth-layout">
-    @* Brand Panel - Visible on desktop *@
-    <aside class="auth-brand">
-        <div class="auth-brand-content">
-            <div class="auth-brand-logo">📊</div>
-            <h1>ModernERP</h1>
-            <p class="subtitle">
-                Sistema de gestão empresarial moderno, integrando autenticação 
-                segura com sua aplicação legada de forma transparente.
-            </p>
+<div class="auth-wrapper">
+    @* Animated Background *@
+    <div class="bg-gradient">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+        <div class="gradient-orb orb-3"></div>
+    </div>
+    
+    @* Noise Overlay *@
+    <div class="bg-noise"></div>
 
-            <div class="auth-brand-features">
-                <div class="auth-brand-feature">
-                    <span class="auth-brand-feature-icon">🔐</span>
-                    <span class="auth-brand-feature-text">Autenticação segura com JWT</span>
+    @* Content *@
+    <div class="auth-content">
+        @* Brand Section - Desktop *@
+        <aside class="brand-section">
+            <div class="brand-inner">
+                <div class="brand-logo">
+                    <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="32" height="32" rx="8" fill="url(#logo-gradient)"/>
+                        <path d="M10 16L14 12L18 16L22 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M10 20L14 16L18 20L22 16" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+                        <defs>
+                            <linearGradient id="logo-gradient" x1="0" y1="0" x2="32" y2="32">
+                                <stop stop-color="#6366f1"/>
+                                <stop offset="1" stop-color="#8b5cf6"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    <span>SysFood</span>
                 </div>
-                <div class="auth-brand-feature">
-                    <span class="auth-brand-feature-icon">🚀</span>
-                    <span class="auth-brand-feature-text">Integração automática com ERP</span>
+
+                <h1 class="brand-title">
+                    Legacy meets
+                    <br/>
+                    <span class="text-gradient">Modern</span>
+                </h1>
+
+                <p class="brand-desc">
+                    Secure authentication layer for your Harbour/MiniGUI 
+                    system. Seamless integration via protocol handlers.
+                </p>
+
+                <div class="features">
+                    <div class="feature">
+                        <div class="feature-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 1a4.5 4.5 0 00-4.5 4.5V9H5a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-.5V5.5A4.5 4.5 0 0010 1zm3 8V5.5a3 3 0 10-6 0V9h6z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <div class="feature-text">
+                            <strong>JWT Authentication</strong>
+                            <span>Secure tokens with configurable expiration</span>
+                        </div>
+                    </div>
+
+                    <div class="feature">
+                        <div class="feature-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M15.312 11.424a5.5 5.5 0 01-9.201 2.466l-.312-.311h2.433a.75.75 0 000-1.5H3.989a.75.75 0 00-.75.75v4.242a.75.75 0 001.5 0v-2.43l.31.31a7 7 0 0011.712-3.138.75.75 0 00-1.449-.39zm1.23-3.723a.75.75 0 00.219-.53V2.929a.75.75 0 00-1.5 0V5.36l-.31-.31A7 7 0 003.239 8.188a.75.75 0 101.448.389A5.5 5.5 0 0113.89 6.11l.311.31h-2.432a.75.75 0 000 1.5h4.243a.75.75 0 00.53-.219z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <div class="feature-text">
+                            <strong>Strangler Fig Pattern</strong>
+                            <span>Gradual migration without disruption</span>
+                        </div>
+                    </div>
+
+                    <div class="feature">
+                        <div class="feature-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M12.232 4.232a2.5 2.5 0 013.536 3.536l-1.225 1.224a.75.75 0 001.061 1.06l1.224-1.224a4 4 0 00-5.656-5.656l-3 3a4 4 0 00.225 5.865.75.75 0 00.977-1.138 2.5 2.5 0 01-.142-3.667l3-3z" />
+                                <path d="M11.603 7.963a.75.75 0 00-.977 1.138 2.5 2.5 0 01.142 3.667l-3 3a2.5 2.5 0 01-3.536-3.536l1.225-1.224a.75.75 0 00-1.061-1.06l-1.224 1.224a4 4 0 105.656 5.656l3-3a4 4 0 00-.225-5.865z" />
+                            </svg>
+                        </div>
+                        <div class="feature-text">
+                            <strong>Protocol Handler</strong>
+                            <span>sysfood:// native integration</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="auth-brand-feature">
-                    <span class="auth-brand-feature-icon">💻</span>
-                    <span class="auth-brand-feature-text">Interface moderna e responsiva</span>
+
+                <div class="tech-stack">
+                    <span class="tech-label">Built with</span>
+                    <div class="tech-items">
+                        <span>.NET 8</span>
+                        <span class="separator">·</span>
+                        <span>Blazor</span>
+                        <span class="separator">·</span>
+                        <span>PostgreSQL</span>
+                    </div>
                 </div>
             </div>
-        </div>
-    </aside>
+        </aside>
 
-    @* Form Panel *@
-    <section class="auth-form-panel">
-        <div class="auth-form-container">
-            @* Mobile brand header *@
-            <div class="auth-mobile-brand">
-                <div class="auth-mobile-logo">📊</div>
-                <h1>ModernERP</h1>
-                <p>Sistema de Gestão Empresarial</p>
+        @* Form Section *@
+        <main class="form-section">
+            @* Mobile Logo *@
+            <div class="mobile-brand">
+                <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="32" height="32" rx="8" fill="url(#mobile-logo-gradient)"/>
+                    <path d="M10 16L14 12L18 16L22 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M10 20L14 16L18 20L22 16" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+                    <defs>
+                        <linearGradient id="mobile-logo-gradient" x1="0" y1="0" x2="32" y2="32">
+                            <stop stop-color="#6366f1"/>
+                            <stop offset="1" stop-color="#8b5cf6"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <span>SysFood</span>
             </div>
 
             @Body
-        </div>
-    </section>
+        </main>
+    </div>
 </div>
+
+<style>
+    /* Base Wrapper */
+    .auth-wrapper {
+        min-height: 100vh;
+        background: #09090b;
+        position: relative;
+        overflow: hidden;
+    }
+
+    /* Animated Gradient Background */
+    .bg-gradient {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+    }
+
+    .gradient-orb {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(80px);
+        opacity: 0.5;
+        animation: float 20s infinite ease-in-out;
+    }
+
+    .orb-1 {
+        width: 600px;
+        height: 600px;
+        background: radial-gradient(circle, #6366f1 0%, transparent 70%);
+        top: -200px;
+        left: -100px;
+        animation-delay: 0s;
+    }
+
+    .orb-2 {
+        width: 500px;
+        height: 500px;
+        background: radial-gradient(circle, #8b5cf6 0%, transparent 70%);
+        bottom: -150px;
+        right: -100px;
+        animation-delay: -7s;
+    }
+
+    .orb-3 {
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(circle, #ec4899 0%, transparent 70%);
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        animation-delay: -14s;
+        opacity: 0.3;
+    }
+
+    @@keyframes float {
+        0%, 100% { transform: translate(0, 0) scale(1); }
+        25% { transform: translate(30px, -30px) scale(1.05); }
+        50% { transform: translate(-20px, 20px) scale(0.95); }
+        75% { transform: translate(20px, 30px) scale(1.02); }
+    }
+
+    /* Noise Texture */
+    .bg-noise {
+        position: absolute;
+        inset: 0;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        opacity: 0.03;
+        pointer-events: none;
+    }
+
+    /* Content Layout */
+    .auth-content {
+        position: relative;
+        z-index: 1;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    @@media (min-width: 1024px) {
+        .auth-content {
+            flex-direction: row;
+        }
+    }
+
+    /* Brand Section */
+    .brand-section {
+        display: none;
+        flex: 1;
+        padding: 48px;
+        align-items: center;
+        justify-content: center;
+    }
+
+    @@media (min-width: 1024px) {
+        .brand-section {
+            display: flex;
+            max-width: 50%;
+        }
+    }
+
+    .brand-inner {
+        max-width: 420px;
+    }
+
+    .brand-logo {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 48px;
+    }
+
+    .brand-logo svg {
+        width: 40px;
+        height: 40px;
+    }
+
+    .brand-logo span {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: #ffffff;
+        letter-spacing: -0.02em;
+    }
+
+    .brand-title {
+        font-size: 3rem;
+        font-weight: 700;
+        color: #ffffff;
+        line-height: 1.1;
+        letter-spacing: -0.03em;
+        margin: 0 0 24px;
+    }
+
+    .text-gradient {
+        background: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .brand-desc {
+        font-size: 1.0625rem;
+        color: rgba(255, 255, 255, 0.6);
+        line-height: 1.7;
+        margin: 0 0 48px;
+    }
+
+    /* Features */
+    .features {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .feature {
+        display: flex;
+        align-items: flex-start;
+        gap: 14px;
+    }
+
+    .feature-icon {
+        width: 36px;
+        height: 36px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+
+    .feature-icon svg {
+        width: 18px;
+        height: 18px;
+        color: #a5b4fc;
+    }
+
+    .feature-text {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+    }
+
+    .feature-text strong {
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: #ffffff;
+    }
+
+    .feature-text span {
+        font-size: 0.8125rem;
+        color: rgba(255, 255, 255, 0.4);
+    }
+
+    /* Tech Stack */
+    .tech-stack {
+        margin-top: 56px;
+        padding-top: 24px;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .tech-label {
+        display: block;
+        font-size: 0.6875rem;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.3);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        margin-bottom: 10px;
+    }
+
+    .tech-items {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .tech-items span {
+        font-size: 0.875rem;
+        color: rgba(255, 255, 255, 0.6);
+    }
+
+    .tech-items .separator {
+        color: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Form Section */
+    .form-section {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 32px 24px;
+        min-height: 100vh;
+    }
+
+    @@media (min-width: 1024px) {
+        .form-section {
+            padding: 48px;
+            max-width: 50%;
+        }
+    }
+
+    /* Mobile Brand */
+    .mobile-brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 32px;
+    }
+
+    @@media (min-width: 1024px) {
+        .mobile-brand {
+            display: none;
+        }
+    }
+
+    .mobile-brand svg {
+        width: 32px;
+        height: 32px;
+    }
+
+    .mobile-brand span {
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: #ffffff;
+        letter-spacing: -0.02em;
+    }
+</style>
